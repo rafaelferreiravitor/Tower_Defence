@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] List<Block> Path;
-
-    int i = 0;
+    [SerializeField] List<Waypoint> Path;
 
     private void Start()
     {
-        InvokeRepeating("PlayPath",1,1);
-        
+        StartCoroutine(PlayPath());
     }
 
-    public void PlayPath()
+    IEnumerator PlayPath()
     {
-        gameObject.transform.position = Path[i].GetComponent<Transform>().position;
-        Debug.Log(Path[i].GetComponent<Transform>().position.ToString());
-        if (i < Path.Count-1)
-            i++;
+
+        foreach (var item in Path)
+        {
+            gameObject.transform.position = item.GetComponent<Transform>().position;
+            yield return new WaitForSeconds(1f);
+        }
+        
+        yield return new WaitForSeconds(1f);
     }
 }
