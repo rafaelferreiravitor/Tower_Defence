@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 
@@ -24,13 +25,17 @@ public class CubeEditor : MonoBehaviour
 
     private void SnapToGrid()
     {
-        transform.position = waypoint.GetGridPos();
+        transform.position = new UnityEngine.Vector3(
+            waypoint.GetGridPos().x * waypoint.GetGridSize(),
+            0,
+            waypoint.GetGridPos().y * waypoint.GetGridSize()
+            );
     }
 
     private void UpdateLabel()
     {
         textMesh = GetComponentInChildren<TextMesh>();
-        string labelText = waypoint.GetGridPos().x / waypoint.GetGridSize() + "," + waypoint.GetGridPos().z / waypoint.GetGridSize();
+        string labelText = waypoint.GetGridPos().x + "," + waypoint.GetGridPos().y ;
         textMesh.text = labelText;
         gameObject.name = "Waypoint (" + labelText + ")";
     }
