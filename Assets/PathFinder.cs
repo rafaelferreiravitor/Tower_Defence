@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using UnityEngine;
 
 public class PathFinder : MonoBehaviour
@@ -9,6 +10,8 @@ public class PathFinder : MonoBehaviour
 
     Dictionary<Vector2Int, Waypoint> grid = new Dictionary<Vector2Int, Waypoint>();
     [SerializeField] Waypoint StartWaypoint, EndWaypoint;
+    Queue<Waypoint> queue = new Queue<Waypoint>();
+
     Vector2Int[] directions =
     {
         Vector2Int.up,
@@ -22,8 +25,25 @@ public class PathFinder : MonoBehaviour
         LoadBloks();
         ColorStartAndEndPoint();
         ExploreNeighbours();
+        PathFind();
 
-        
+
+    }
+
+    public void PathFind()
+    {
+        queue.Enqueue(StartWaypoint);
+        //print("Entered: " + queue.Count) ;
+        while (queue.Count > 0)
+        {
+            var searchingCenter = queue.Dequeue();
+            if (searchingCenter.Equals(EndWaypoint))
+            {
+                print("Found! ");
+            }
+            
+            
+        }
     }
 
     public void ExploreNeighbours()
@@ -36,7 +56,7 @@ public class PathFinder : MonoBehaviour
                 grid[explorationCoordinates].SetTopColor(Color.blue);
             }
             
-        }
+        } 
     }
 
     private void ColorStartAndEndPoint()
@@ -64,13 +84,13 @@ public class PathFinder : MonoBehaviour
             }
             else
             {
-                print(item.GetGridPos());
+                //print(item.GetGridPos());
                 grid.Add(item.GetGridPos(), item);
             
             }
            
         }
-        print("Loaded " + grid.Count + " blocks");
+        //print("Loaded " + grid.Count + " blocks");
 
 
 
