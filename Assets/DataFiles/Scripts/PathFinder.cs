@@ -11,6 +11,9 @@ public class PathFinder : MonoBehaviour
     Dictionary<Vector2Int, Waypoint> grid = new Dictionary<Vector2Int, Waypoint>();
     [SerializeField] Waypoint StartWaypoint, EndWaypoint;
     Queue<Waypoint> queue = new Queue<Waypoint>();
+    bool isRunning = true;
+    Waypoint searchCenter; // current search center
+
 
     Vector2Int[] directions =
     {
@@ -24,39 +27,69 @@ public class PathFinder : MonoBehaviour
     {
         LoadBloks();
         ColorStartAndEndPoint();
-        ExploreNeighbours();
+        //ExploreNeighbours();
         PathFind();
-
 
     }
 
     public void PathFind()
     {
         queue.Enqueue(StartWaypoint);
-        //print("Entered: " + queue.Count) ;
-        while (queue.Count > 0)
+
+        while (queue.Count > 0 && isRunning)
         {
-            var searchingCenter = queue.Dequeue();
-            if (searchingCenter.Equals(EndWaypoint))
-            {
-                print("Found! ");
-            }
-            
-            
+            searchCenter = queue.Dequeue();
+   
+            HaltItIfItFound();
+            ExploreNeighbours();
+
+
+
+        }
+    }
+
+    private void HaltItIfItFound()
+    {
+        if (searchCenter.Equals(EndWaypoint))
+        {
+            print("Found! ");
+            isRunning = false;
         }
     }
 
     public void ExploreNeighbours()
     {
+        if (!isRunning) return;
+
         foreach (var item in directions)
         {
-            Vector2Int explorationCoordinates = StartWaypoint.GetGridPos() + item;
-            if (grid.ContainsKey(explorationCoordinates))
+            Vector2Int neighbourCoordinates = searchCenter.GetGridPos() + item;
+            if (grid.ContainsKey(neighbourCoordinates))
             {
-                grid[explorationCoordinates].SetTopColor(Color.blue);
+                QueueNewNeighbour(neighbourCoordinates);
             }
-            
+
         } 
+    }
+
+    private void QueueNewNeighbour(Vector2Int neighbourCoordinates)
+    {
+        Waypoint neighbour = grid[neighbourCoordinates];
+        if (grid[neighbourCoordinates].IsExplored || queue.Contains(neighbour))
+        {
+            
+            
+        }
+        else
+        {
+            //neighbour.SetTopColor(Color.blue); // todo move later
+            neighbour.exploredFrom = searchCenter;
+            neighbour.IsExplored = true; //todo Marking as explored // check if it need to be at the end after explore neighbour // maybe it makes sense to have it when it is enqueued
+            queue.Enqueue(neighbour);
+            print("Queuing " + neighbour.name);
+
+            //print("Queuing " + neighbour.isExplored);
+        }
     }
 
     private void ColorStartAndEndPoint()

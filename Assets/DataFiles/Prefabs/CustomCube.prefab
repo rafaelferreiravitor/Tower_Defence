@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d97fd88b91409b4fb534aa9162cc0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridSize: 11
 --- !u!114 &325020772128693039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d99c960b528fa46a99de2fe2c573fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exploredColor: {r: 0.4026344, g: 0.7161334, b: 0.9811321, a: 0}
+  exploredFrom: {fileID: 0}
 --- !u!1 &3161387659200903323
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +421,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7344495293383337634}
-  m_Text: 0,0
+  m_Text: 4,2
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartWaypoint: {fileID: 857693426}
-  EndWaypoint: {fileID: 857693426}
+  EndWaypoint: {fileID: 1197359906}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,11 +783,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 920549072}
     m_Modifications:
-    - target: {fileID: 482711332601438961, guid: c7a0032ad06077648b91233182fe93df,
-        type: 3}
-      propertyPath: m_Text
-      value: 4,2
-      objectReference: {fileID: 0}
     - target: {fileID: 1937039984713319306, guid: c7a0032ad06077648b91233182fe93df,
         type: 3}
       propertyPath: m_Name
@@ -856,6 +851,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1187340946}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1197359906 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 325020772128693039, guid: c7a0032ad06077648b91233182fe93df,
+    type: 3}
+  m_PrefabInstance: {fileID: 2022885641}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d99c960b528fa46a99de2fe2c573fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1241609613 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2616399613204732343, guid: c7a0032ad06077648b91233182fe93df,
