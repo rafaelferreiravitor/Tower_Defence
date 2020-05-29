@@ -13,7 +13,7 @@ public class PathFinder : MonoBehaviour
     Queue<Waypoint> queue = new Queue<Waypoint>();
     bool isRunning = true;
     Waypoint searchCenter; // current search center
-
+    List<Waypoint> Path = new List<Waypoint>(); //todo make it private
 
     Vector2Int[] directions =
     {
@@ -23,16 +23,9 @@ public class PathFinder : MonoBehaviour
         Vector2Int.left,
     };
 
-    void Start()
-    {
-        LoadBloks();
-        ColorStartAndEndPoint();
-        //ExploreNeighbours();
-        PathFind();
 
-    }
 
-    public void PathFind()
+    public void BreadthFirstSearch()
     {
         queue.Enqueue(StartWaypoint);
 
@@ -56,6 +49,22 @@ public class PathFinder : MonoBehaviour
             isRunning = false;
         }
     }
+
+    public List<Waypoint> CreatePath(Waypoint waypoint)
+
+    {
+        Path.Add(waypoint);
+        waypoint.SetTopColor(Color.blue);
+        if (waypoint.Equals(StartWaypoint))
+        {
+            Path.Reverse();
+            return Path;
+        }
+        return CreatePath(waypoint.exploredFrom);
+
+    }
+
+    
 
     public void ExploreNeighbours()
     {
@@ -123,22 +132,17 @@ public class PathFinder : MonoBehaviour
             }
            
         }
-        //print("Loaded " + grid.Count + " blocks");
-
-
-
-
-        //print(grid);
-
-
-
 
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public List<Waypoint> GetPath()
     {
-        
+        Path.Clear();
+        LoadBloks();
+        BreadthFirstSearch();
+        CreatePath(EndWaypoint);
+        ColorStartAndEndPoint();
+        return Path;
     }
 }
