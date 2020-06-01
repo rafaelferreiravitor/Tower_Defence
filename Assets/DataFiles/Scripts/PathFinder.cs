@@ -45,7 +45,7 @@ public class PathFinder : MonoBehaviour
     {
         if (searchCenter.Equals(EndWaypoint))
         {
-            print("Found! ");
+            //print("Found! ");
             isRunning = false;
         }
     }
@@ -95,7 +95,7 @@ public class PathFinder : MonoBehaviour
             neighbour.exploredFrom = searchCenter;
             neighbour.IsExplored = true; //todo Marking as explored // check if it need to be at the end after explore neighbour // maybe it makes sense to have it when it is enqueued
             queue.Enqueue(neighbour);
-            print("Queuing " + neighbour.name);
+            //print("Queuing " + neighbour.name);
 
             //print("Queuing " + neighbour.isExplored);
         }
@@ -115,8 +115,9 @@ public class PathFinder : MonoBehaviour
         foreach (var item in waypoints)
         {
 
-            var gridPos = item.GetGridPos() * item.GetGridSize();
+            var gridPos = item.GetGridPos();
             bool isOverlapping = grid.ContainsKey(gridPos);
+            //print(item.GetGridPos());
             //overlaping blocks
             //add to dictionary
             
