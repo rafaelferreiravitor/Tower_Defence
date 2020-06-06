@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] EnemyMovement EnemyPrefab;
     [SerializeField] List<EnemyMovement> Enemies = new List<EnemyMovement>();
-    [SerializeField] float secondsBetweenSpawns = 2f;
+    [SerializeField] [Range(1,10)] int secondsBetweenSpawns = 2;
 
     private void Awake()
     {
@@ -17,7 +17,9 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            Enemies.Add(Instantiate(EnemyPrefab));
+            EnemyMovement enemy = Instantiate(EnemyPrefab);
+            enemy.gameObject.transform.SetParent(gameObject.transform);
+            Enemies.Add(enemy);
             yield return new WaitForSeconds(secondsBetweenSpawns);
         }
     }

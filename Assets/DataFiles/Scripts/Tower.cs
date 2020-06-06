@@ -6,10 +6,12 @@ public class Tower : MonoBehaviour
 {
 
     [SerializeField] Transform objectToPan;
-    [SerializeField] Transform targetEnemy;
     [SerializeField] GameObject projectileGameObject;
     ParticleSystem projectile;
     [SerializeField] float attackRange = 5f;
+
+
+    Transform targetEnemy;
 
     private void Start()
     {
@@ -18,13 +20,42 @@ public class Tower : MonoBehaviour
     }
     void Update()
     {
+        SetTargetEnemy();
         if (targetEnemy)
         {
             objectToPan.LookAt(targetEnemy);
             Shoot();
         }
-        
 
+
+    }
+
+    private void SetTargetEnemy()
+    {
+        var enemies = FindObjectsOfType<EnemyMovement>();
+        if (enemies != null)
+        {
+            EnemyMovement closestEnemy = FindClosest(enemies);
+            targetEnemy = closestEnemy.transform;
+        }
+        else
+        {
+            targetEnemy = null;
+        }
+    }
+
+    private EnemyMovement FindClosest(EnemyMovement[] enemies)
+    {
+        var closestEnemy = enemies[0];
+        foreach (var item in enemies)
+        {
+            if (Vector3.Distance(item.transform.position, transform.position) < Vector3.Distance(closestEnemy.transform.position, transform.position))
+            {
+                closestEnemy = item;
+            }
+        }
+
+        return closestEnemy;
     }
 
     void Shoot()
