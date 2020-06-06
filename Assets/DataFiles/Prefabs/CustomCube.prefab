@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2616399613204732343}
   - component: {fileID: 1179371469}
   - component: {fileID: 325020772128693039}
+  - component: {fileID: 2730073737435205096}
   m_Layer: 0
   m_Name: CustomCube
   m_TagString: Untagged
@@ -60,6 +61,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exploredColor: {r: 0.4026344, g: 0.7161334, b: 0.9811321, a: 0}
   exploredFrom: {fileID: 0}
+--- !u!65 &2730073737435205096
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937039984713319306}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.03273, y: 10.422219, z: 10.846232}
+  m_Center: {x: 0.0030708313, y: -5.135697, z: 0.591331}
 --- !u!1 &7344495293383337634
 GameObject:
   m_ObjectHideFlags: 0

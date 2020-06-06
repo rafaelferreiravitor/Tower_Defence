@@ -16,7 +16,7 @@ public class Tower : MonoBehaviour
     private void Start()
     {
         projectile = projectileGameObject.GetComponent<ParticleSystem>();
-        print(projectile);
+ 
     }
     void Update()
     {

@@ -34,7 +34,7 @@ public class PathFinder : MonoBehaviour
         LoadBloks();
         BreadthFirstSearch();
         CreatePath(EndWaypoint);
-        ColorStartAndEndPoint();
+
     }
 
     public void BreadthFirstSearch()
@@ -66,7 +66,7 @@ public class PathFinder : MonoBehaviour
 
     {
         Path.Add(waypoint);
-        waypoint.SetTopColor(Color.blue);
+
         if (waypoint.Equals(StartWaypoint))
         {
             Path.Reverse();
@@ -113,11 +113,6 @@ public class PathFinder : MonoBehaviour
         }
     }
 
-    private void ColorStartAndEndPoint()
-    {
-        StartWaypoint.SetTopColor(Color.green);
-        EndWaypoint.SetTopColor(Color.red);
-    }
 
 
     private void LoadBloks()

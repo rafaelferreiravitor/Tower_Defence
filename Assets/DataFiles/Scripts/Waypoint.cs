@@ -16,8 +16,7 @@ public class Waypoint : MonoBehaviour
         set
         {
             isExplored = value;
-            if(IsExplored)
-                SetTopColor(exploredColor);
+
         }
     }
     public Vector2Int GetGridPos()
@@ -33,9 +32,12 @@ public class Waypoint : MonoBehaviour
         return GridSize;
     }
 
-    public void SetTopColor(Color color)
+
+    private void OnMouseOver()
     {
-        MeshRenderer topMeshRenderer = transform.Find("Top").GetComponent<MeshRenderer>();
-        topMeshRenderer.material.color = color;
+        print("dsadsadas");
     }
+
+
+    
 }

@@ -17,7 +17,8 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            EnemyMovement enemy = Instantiate(EnemyPrefab);
+            var startPos = GameObject.FindObjectOfType<PathFinder>().transform;
+            EnemyMovement enemy = Instantiate(EnemyPrefab,startPos.position, new Quaternion());
             enemy.gameObject.transform.SetParent(gameObject.transform);
             Enemies.Add(enemy);
             yield return new WaitForSeconds(secondsBetweenSpawns);
