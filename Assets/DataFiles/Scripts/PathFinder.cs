@@ -23,7 +23,19 @@ public class PathFinder : MonoBehaviour
         Vector2Int.left,
     };
 
+    private void Awake()
+    {
+        CalculatePath();
+    }
 
+    private void CalculatePath()
+    {
+        Path.Clear();
+        LoadBloks();
+        BreadthFirstSearch();
+        CreatePath(EndWaypoint);
+        ColorStartAndEndPoint();
+    }
 
     public void BreadthFirstSearch()
     {
@@ -139,11 +151,7 @@ public class PathFinder : MonoBehaviour
 
     public List<Waypoint> GetPath()
     {
-        Path.Clear();
-        LoadBloks();
-        BreadthFirstSearch();
-        CreatePath(EndWaypoint);
-        ColorStartAndEndPoint();
+
         return Path;
     }
 }

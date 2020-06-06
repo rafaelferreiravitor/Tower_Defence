@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour
     [SerializeField] Transform targetEnemy;
     [SerializeField] GameObject projectileGameObject;
     ParticleSystem projectile;
+    [SerializeField] float attackRange = 5f;
 
     private void Start()
     {
@@ -17,14 +18,18 @@ public class Tower : MonoBehaviour
     }
     void Update()
     {
-        objectToPan.LookAt(targetEnemy);
-        Shoot();
+        if (targetEnemy)
+        {
+            objectToPan.LookAt(targetEnemy);
+            Shoot();
+        }
+        
 
     }
 
     void Shoot()
     {
-        if (Vector3.Distance(targetEnemy.transform.position, transform.position)/11 < 5) //todo 11 deve ser substituido pelo gridsize
+        if (Vector3.Distance(targetEnemy.transform.position, transform.position)/11 < attackRange) //todo 11 deve ser substituido pelo gridsize
         {      
             if(!projectile.isEmitting)
                 projectile.Play();
