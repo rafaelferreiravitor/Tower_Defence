@@ -14,13 +14,17 @@ public class Waypoint : MonoBehaviour
 
     InputActions inputActions;
     Vector2 mousePosition;
-    bool leftClick = false;
+
+    bool mouseOver = false;
+
+    [SerializeField] Tower towerPrefab;
+    
 
     private void Awake()
     {
         inputActions = new InputActions();
         inputActions.ActionMap.MousePosition.performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
-        inputActions.ActionMap.MouseClick.performed += ctx => leftClick = ctx.performed;
+        inputActions.ActionMap.MouseClick.performed += ctx => LeftClick();
     }
 
 
@@ -46,14 +50,26 @@ public class Waypoint : MonoBehaviour
         return GridSize;
     }
 
-
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
-        if (leftClick) {
-            leftClick = false;
+        mouseOver = true;
+    }
+
+    private void OnMouseExit()
+    {
+        mouseOver = false;
+    }
+    private void LeftClick()
+    {
+        
+        if (mouseOver) {
             if (isPlaceable)
             {
+                isPlaceable = false;
                 print("Placeable block");
+                var tower = Instantiate(towerPrefab, transform.position, new Quaternion()) ;
+                var pool =  GameObject.FindGameObjectWithTag("TowerPool");
+                tower.transform.SetParent(pool.transform);
             }
             else
             {
