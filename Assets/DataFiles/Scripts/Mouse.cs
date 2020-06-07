@@ -11,7 +11,7 @@ public class Mouse : MonoBehaviour
     {
         inputActions = new InputActions();
         inputActions.ActionMap.MousePosition.performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
-        inputActions.ActionMap.MouseClick.performed += ctx => print("Click in position: "+ mousePosition);
+        //inputActions.ActionMap.MouseClick.performed += ctx => print("Click in position: "+ mousePosition);
     }
 
     private void OnEnable()

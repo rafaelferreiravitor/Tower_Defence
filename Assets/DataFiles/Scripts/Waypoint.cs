@@ -10,6 +10,20 @@ public class Waypoint : MonoBehaviour
     const int GridSize = 11;
     public Waypoint exploredFrom;
 
+    public bool isPlaceable = true;
+
+    InputActions inputActions;
+    Vector2 mousePosition;
+    bool leftClick = false;
+
+    private void Awake()
+    {
+        inputActions = new InputActions();
+        inputActions.ActionMap.MousePosition.performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
+        inputActions.ActionMap.MouseClick.performed += ctx => leftClick = ctx.performed;
+    }
+
+
     public bool IsExplored
     {
         get => isExplored;
@@ -35,9 +49,28 @@ public class Waypoint : MonoBehaviour
 
     private void OnMouseOver()
     {
-        print("dsadsadas");
+        if (leftClick) {
+            leftClick = false;
+            if (isPlaceable)
+            {
+                print("Placeable block");
+            }
+            else
+            {
+                print("Not a placeable block");
+            }
+        }
     }
 
 
-    
+    private void OnEnable()
+    {
+        inputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
+    }
+
 }

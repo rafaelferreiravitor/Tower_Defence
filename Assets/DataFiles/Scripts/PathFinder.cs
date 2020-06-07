@@ -66,7 +66,7 @@ public class PathFinder : MonoBehaviour
 
     {
         Path.Add(waypoint);
-
+        waypoint.isPlaceable = false;
         if (waypoint.Equals(StartWaypoint))
         {
             Path.Reverse();
