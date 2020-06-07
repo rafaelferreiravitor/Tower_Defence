@@ -38,7 +38,8 @@ public class EnemyDamage : MonoBehaviour
             var destoyed = gameObjectDestoyed.GetComponent<ParticleSystem>();
             destoyed.Play();
             alive = false;
-            Invoke("KillEnemy", 3);
+            Destroy(gameObject, 3);
+            //Invoke("KillEnemy", 3);
 
         }
         else if (remainingLife <= fullLife * 0.70)
@@ -50,8 +51,4 @@ public class EnemyDamage : MonoBehaviour
         
     }
 
-    void KillEnemy()
-    {
-        Destroy(gameObject);
-    }
 }

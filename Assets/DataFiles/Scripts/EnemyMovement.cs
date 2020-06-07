@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-
+    [SerializeField] float movementPeriod = 1f;
 
     private void Start()
     {
@@ -17,15 +17,18 @@ public class EnemyMovement : MonoBehaviour
     
     IEnumerator PlayPath(List<Waypoint> path)
     {
-        
+
         foreach (var item in path)
         {
             gameObject.transform.position = item.GetComponent<Transform>().position;
             yield return new WaitForSeconds(1f);
         }
-        
-        yield return new WaitForSeconds(2f);
+        FindObjectOfType<BaseDefence>().Hit(10);
+        SelfDestroy();
     }
 
-
+    private void SelfDestroy()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -17,7 +17,6 @@ public class Waypoint : MonoBehaviour
 
     bool mouseOver = false;
 
-    [SerializeField] Tower towerPrefab;
     
 
     private void Awake()
@@ -65,11 +64,7 @@ public class Waypoint : MonoBehaviour
         if (mouseOver) {
             if (isPlaceable)
             {
-                isPlaceable = false;
-                print("Placeable block");
-                var tower = Instantiate(towerPrefab, transform.position, new Quaternion()) ;
-                var pool =  GameObject.FindGameObjectWithTag("TowerPool");
-                tower.transform.SetParent(pool.transform);
+                FindObjectOfType<TowerFactory>().AddTower(this);
             }
             else
             {
