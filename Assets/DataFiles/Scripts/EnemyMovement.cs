@@ -23,7 +23,6 @@ public class EnemyMovement : MonoBehaviour
             gameObject.transform.position = item.GetComponent<Transform>().position;
             yield return new WaitForSeconds(1f);
         }
-        FindObjectOfType<BaseDefence>().Hit(10);
         SelfDestroy();
     }
 

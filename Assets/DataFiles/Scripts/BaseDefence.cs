@@ -1,17 +1,45 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseDefence : MonoBehaviour
 {
-    int life = 100;
+    [SerializeField] int life = 100;
 
-    public void Hit(int hit)
+    private void Awake()
+    {
+        UpdateUI();
+    }
+
+    void Hit(int hit)
     {
         life -= hit;
+        HitFx();
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        var canvas = FindObjectOfType<GraphicRaycaster>();
+        var baseHealthText = canvas.transform.Find("BaseHealthText");
+        baseHealthText.GetComponent<Text>().text = life.ToString();
+
+    }
+
+    private void HitFx()
+    {
         var fxGameObject = gameObject.transform.Find("HitFX");
         var fx = fxGameObject.GetComponent<ParticleSystem>();
         fx.Play();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("enter");
+        var enemy = other.GetComponent<EnemyDamage>();
+        Hit(enemy.remainingLife);
     }
 
 }

@@ -9612,6 +9612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fullLife: 100
+  remainingLife: 100
   hitPoints: 10
 --- !u!1001 &5395918791136937718
 PrefabInstance:

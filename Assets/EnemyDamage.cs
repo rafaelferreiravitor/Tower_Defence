@@ -2,17 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UI;
 
 public class EnemyDamage : MonoBehaviour
 {
+    static int numberOfEnemiesAlive = 0;
     [SerializeField] int fullLife = 100;
-    int remainingLife = 100;
+    public int remainingLife = 100;
     [SerializeField] int hitPoints = 10;
     bool alive = true;
 
     private void Awake()
     {
         remainingLife = fullLife;
+        
+        numberOfEnemiesAlive++;
+        UpdateUI();
+
+
+    }
+
+     void UpdateUI()
+    {
+        var canvas = FindObjectOfType<GraphicRaycaster>();
+        var enemyText = canvas.transform.Find("EnemyText");
+        enemyText.transform.GetComponent<Text>().text = numberOfEnemiesAlive.ToString();
+    }
+
+    private void OnDestroy()
+    {
+        numberOfEnemiesAlive--;
+        UpdateUI();
     }
 
     private void OnParticleCollision(GameObject other)
