@@ -32,6 +32,7 @@ public class TowerFactory : MonoBehaviour
         towerQueue.Enqueue(tower);
         waypoint.isPlaceable = false;
 
+
     }
 
      void MoveExistingTower(Waypoint waypoint)

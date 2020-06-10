@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
             EnemyMovement enemy = Instantiate(EnemyPrefab,startPos.position, new Quaternion());
             enemy.gameObject.transform.SetParent(gameObject.transform);
             Enemies.Add(enemy);
+            transform.GetComponent<AudioSource>().Play();
             yield return new WaitForSeconds(secondsBetweenSpawns);
         }
     }

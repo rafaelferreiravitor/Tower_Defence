@@ -11,6 +11,7 @@ public class EnemyDamage : MonoBehaviour
     public int remainingLife = 100;
     [SerializeField] int hitPoints = 10;
     bool alive = true;
+    [SerializeField] AudioClip deathSFX;
 
     private void Awake()
     {
@@ -52,12 +53,16 @@ public class EnemyDamage : MonoBehaviour
 
     private void EnemyDamaged()
     {
+        transform.GetComponent<AudioSource>().Play();
         if (remainingLife <= 0)
         {
             var gameObjectDestoyed = transform.Find("DeathFX").Find("Destroyed");
             var destoyed = gameObjectDestoyed.GetComponent<ParticleSystem>();
             destoyed.Play();
             alive = false;
+
+            
+            AudioSource.PlayClipAtPoint(deathSFX,Camera.main.transform.position);
             Destroy(gameObject, 3);
             //Invoke("KillEnemy", 3);
 

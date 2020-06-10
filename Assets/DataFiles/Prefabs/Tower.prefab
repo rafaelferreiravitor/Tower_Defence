@@ -48,6 +48,7 @@ MonoBehaviour:
   objectToPan: {fileID: 1594817347426487541}
   projectileGameObject: {fileID: 1598636773603095292}
   attackRange: 5
+  baseWaypoint: {fileID: 0}
 --- !u!1 &1598636773603095292
 GameObject:
   m_ObjectHideFlags: 0

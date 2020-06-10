@@ -32,6 +32,7 @@ public class BaseDefence : MonoBehaviour
     {
         var fxGameObject = gameObject.transform.Find("HitFX");
         var fx = fxGameObject.GetComponent<ParticleSystem>();
+        transform.GetComponent<AudioSource>().Play();
         fx.Play();
     }
 

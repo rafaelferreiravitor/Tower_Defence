@@ -17,7 +17,8 @@ public class Tower : MonoBehaviour
     private void Start()
     {
         projectile = projectileGameObject.GetComponent<ParticleSystem>();
- 
+        
+
     }
     void Update()
     {
@@ -62,9 +63,11 @@ public class Tower : MonoBehaviour
     void Shoot()
     {
         if (Vector3.Distance(targetEnemy.transform.position, transform.position)/11 < attackRange) //todo 11 deve ser substituido pelo gridsize
-        {      
-            if(!projectile.isEmitting)
+        {
+            if (!projectile.isEmitting)
+            {
                 projectile.Play();
+            }
         }
         else
         {
