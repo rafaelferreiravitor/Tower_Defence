@@ -65,6 +65,7 @@ public class PathFinder : MonoBehaviour
     public List<Waypoint> CreatePath(Waypoint waypoint)
 
     {
+        //print(waypoint.name);
         Path.Add(waypoint);
         waypoint.isPlaceable = false;
         if (waypoint.Equals(StartWaypoint))
@@ -85,7 +86,7 @@ public class PathFinder : MonoBehaviour
         foreach (var item in directions)
         {
             Vector2Int neighbourCoordinates = searchCenter.GetGridPos() + item;
-            if (grid.ContainsKey(neighbourCoordinates))
+            if (grid.ContainsKey(neighbourCoordinates) )
             {
                 QueueNewNeighbour(neighbourCoordinates);
             }
@@ -127,17 +128,22 @@ public class PathFinder : MonoBehaviour
             //print(item.GetGridPos());
             //overlaping blocks
             //add to dictionary
-            
+
             if (isOverlapping)
             {
-                print("Skipping overlapping block: "+ gridPos);
+                print("Skipping overlapping block: " + gridPos);
+            }
+            else if (!item.transform.Find("Block_Neutral"))
+            {
+
+                //print(item.GetGridPos());
+                grid.Add(item.GetGridPos(), item);
             }
             else
             {
-                //print(item.GetGridPos());
-                grid.Add(item.GetGridPos(), item);
-            
+                print("problem in FindObjectsOfType " + item.transform.root.parent);
             }
+            
            
         }
 
