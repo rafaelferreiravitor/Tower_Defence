@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] int hitPoints = 10;
     bool alive = true;
     [SerializeField] AudioClip deathSFX;
+    [SerializeField] ParticleSystem deathFX;
+
 
     private void Awake()
     {
@@ -56,14 +59,16 @@ public class EnemyDamage : MonoBehaviour
         transform.GetComponent<AudioSource>().Play();
         if (remainingLife <= 0)
         {
-            var gameObjectDestoyed = transform.Find("DeathFX").Find("Destroyed");
-            var destoyed = gameObjectDestoyed.GetComponent<ParticleSystem>();
-            destoyed.Play();
+            //var gameObjectDestoyed = transform.Find("DeathFX").Find("Destroyed");
+            //var destoyed = gameObjectDestoyed.GetComponent<ParticleSystem>();
+            //destoyed.Play();
             alive = false;
 
             
             AudioSource.PlayClipAtPoint(deathSFX,Camera.main.transform.position);
-            Destroy(gameObject, 3);
+            var destoyed =Instantiate(deathFX,transform.position,Quaternion.identity);
+            destoyed.Play();
+            Destroy(gameObject);
             //Invoke("KillEnemy", 3);
 
         }
